@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-# ztme-toolbox 1.2.2
+# Zero Tolerance for Major Errors (ZTME)-toolbox 1.2.2
 # (c) copyright 2025 by @Luis Adha
 
 banner='[LUIS-TOOLBOX]'
@@ -18,7 +18,7 @@ files="$(ls -rt .)"
 #echo 
 printf %"$(tput cols)"s | tr " " "-"
 #echo "-------------------------------------------"
-echo " ZTME "
+echo " Zero Tolerance for Major Errors - Toolbox"
 echo " version : v1.2.2"
 #echo "-------------------------------------------"
 printf %"$(tput cols)"s | tr " " "-"
