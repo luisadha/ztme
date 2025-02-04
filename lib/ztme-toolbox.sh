@@ -13,9 +13,9 @@ cd $PWD/script/interactive
 PS3="Your choice: "
 
 files="$(ls -rt .)"
-#echo -e ""
-#echo ""
-#echo 
+function findMatch() {
+find . -type d -exec sh -c 'for d; do [ -f "$d/${d##*/}.sh" ] && echo "$d/${d##*/}.sh"; done' _ {} +
+}
 printf %"$(tput cols)"s | tr " " "-"
 #echo "-------------------------------------------"
 echo " Zero Tolerance for Major Errors - Toolbox"
@@ -25,7 +25,7 @@ printf %"$(tput cols)"s | tr " " "-"
 echo -e "\nRun script as interactively from repository\nWiki bahasa : <https://telegra.ph/Apa-itu-Ztmexluis-03-02>
 help translate you can send to mail: <adharudin14@gmail.com>"
 printf %"$(tput cols)"s | tr " " "-"
-
+echo "Preparing..." && findMatch
 select filename in ${files} "Add repository" "Fix issue if any" Exit;
 do
 [[ -n $filename ]] || { echo "$warn :What's that? Please try again." >&2; continue; }
