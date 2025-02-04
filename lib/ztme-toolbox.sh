@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+# ztme-toolbox 1.2.2
+# (c) copyright 2025 by @Luis Adha
+
 banner='[LUIS-TOOLBOX]'
 warn='[warning]'
 fail='[failure]'
@@ -15,8 +18,8 @@ files="$(ls -rt .)"
 #echo 
 printf %"$(tput cols)"s | tr " " "-"
 #echo "-------------------------------------------"
-echo " Luis User Interactive Script a.k.a LUIS Toolbox"
-echo " version : v1.2.1"
+echo " ZTME "
+echo " version : v1.2.2"
 #echo "-------------------------------------------"
 printf %"$(tput cols)"s | tr " " "-"
 echo -e "\nRun script as interactively from repository\nWiki bahasa : <https://telegra.ph/Apa-itu-Ztmexluis-03-02>
