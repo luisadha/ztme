@@ -8,28 +8,36 @@ warn='[warning]'
 fail='[failure]'
 succ='[success]'
 
-cd $PWD/script/interactive
+#cd $PWD/script/interactive &>/dev/null;
 
 PS3="Your choice: "
 
-files="$(ls -rt .)"
 function findMatch() {
-find . -type d -exec sh -c 'for d; do [ -f "$d/${d##*/}.sh" ] && echo "$d/${d##*/}.sh"; done' _ {} +
+  find . -maxdepth 1 -type d -exec sh -c 'for d; do [ -f "$d/${d##*/}.sh" ] && basename "$d/${d##*/}.sh" .sh; done' _ {} +
 }
+function findMatchRecursif() {
+  find . -type d -exec sh -c 'for d; do [ -f "$d/${d##*/}.sh" ] && basename "$d/${d##*/}.sh" ".sh"; done' _ {} +
+}
+
+files="$(findMatch)"
+
+echo "Preparing..." && findMatch &>/dev/null
+sleep 0.8
+clear
 printf %"$(tput cols)"s | tr " " "-"
 #echo "-------------------------------------------"
-echo " Zero Tolerance for Major Errors - Toolbox"
+echo " Zero Tolerance for Major Errors (ZTME) Toolbox"
 echo " version : v1.2.2"
 #echo "-------------------------------------------"
 printf %"$(tput cols)"s | tr " " "-"
 echo -e "\nRun script as interactively from repository\nWiki bahasa : <https://telegra.ph/Apa-itu-Ztmexluis-03-02>
 help translate you can send to mail: <adharudin14@gmail.com>"
 printf %"$(tput cols)"s | tr " " "-"
-echo "Preparing..." && findMatch
+
 select filename in ${files} "Add repository" "Fix issue if any" Exit;
 do
 [[ -n $filename ]] || { echo "$warn :What's that? Please try again." >&2; continue; }
- 
+
   case ${filename} in
     "Exit")
       echo "Exiting.."
@@ -69,8 +77,8 @@ do
     	echo "You selected $filename ($REPLY)"
     echo
       chmod +x ${filename}/${filename,,}.sh
-      # termux-fix-shebang ${filename}/${filename,,}.sh 
-      ./${filename}/${filename,,}.sh   
+      # termux-fix-shebang ${filename}/${filename,,}.sh
+      ./${filename}/${filename,,}.sh
     echo
      read -t 0.1
      continue
